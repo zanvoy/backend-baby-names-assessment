@@ -31,27 +31,28 @@ Here's what the html looks like in the baby.html files:
 ...
 
 Suggested milestones for incremental development:
- -Extract the year and print it
- -Extract the names and rank numbers and just print them
- -Get the names data into a dict and print it
- -Build the [year, 'name rank', ... ] list and print it
- -Fix main() to use the extract_names list
+ - Extract the year and print it
+ - Extract the names and rank numbers and just print them
+ - Get the names data into a dict and print it
+ - Build the [year, 'name rank', ... ] list and print it
+ - Fix main() to use the extract_names list
 """
 
 
 def extract_names(filename):
     """
-    Given a file name for baby.html, returns a list starting with the year string
-    followed by the name-rank strings in alphabetical order.
+    Given a single file name for babyXXXX.html, returns a single list starting
+    with the year string followed by the name-rank strings in alphabetical order.
     ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
     """
+    names = []
     # +++your code here+++
-    return
+    return names
 
 
 def create_parser():
     """Create a cmd line parser object with 2 argument definitions"""
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Extracts and alphabetizes baby names from html.")
     parser.add_argument(
         '--summaryfile', help='creates a summary file', action='store_true')
     # The nargs option instructs the parser to expect 1 or more filenames.
@@ -60,23 +61,28 @@ def create_parser():
     return parser
 
 
-def main():
+def main(args):
+    # Create a command-line parser object with parsing rules
     parser = create_parser()
-    args = parser.parse_args()
+    # Run the parser to collect command-line arguments into a NAMESPACE called 'ns'
+    ns = parser.parse_args(args)
 
-    if not args:
+    if not ns:
         parser.print_usage()
         sys.exit(1)
 
-    file_list = args.files
+    file_list = ns.files
 
     # option flag
-    create_summary = args.summaryfile
+    create_summary = ns.summaryfile
+
+    # For each filename, call `extract_names` with that single file.
+    # Format the resulting list a vertical list (separated by newline \n)
+    # Use the create_summary flag to decide whether to print the list,
+    # or to write the list to a summary file e.g. `baby1990.html.summary`
 
     # +++your code here+++
-    # For each filename, get the names, then either print the text output
-    # or write it to a summary file
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])
