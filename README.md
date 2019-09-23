@@ -67,7 +67,8 @@ $ grep 'Emily ' *.summary
 This assignment contains a `tests` folder that will test your code in several different ways.  Make sure you are passing all the tests before you submit your work!  There are a couple of ways to test.
  - From the command line:
    `$ python -m unittest discover`
- - Using the built-in TDD framework of VSCode.  Read [this article](https://code.visualstudio.com/docs/python/testing) and understand how to enable the framework in your VSCode IDE.  Once the framework is enabled, you can run and debug any of the tests individually. 
+ - Using the built-in TDD framework of VSCode.  Read [this article](https://code.visualstudio.com/docs/python/testing) and understand how to enable the framework in your VSCode IDE.  Once the framework is enabled, you can run and debug any of the tests individually.
+ ![Babynames Test](img/vscode-test.png)
 
 ## PR (Pull Request) Workflow for this Assignment
 1. *Fork* this repository into your own personal github account.
