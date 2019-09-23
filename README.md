@@ -8,11 +8,11 @@ You will need to add your own code to [babynames.py](./babynames.py) to complete
 Part A
 ------
 
-In the [babynames.py](./babynames.py) file, implement the `extract_names(filename)` function which takes the filename of a baby1990.html file and returns the data from the file as a single list -- the year string at the start of the list followed by the name-rank strings in alphabetical order. 
+In the `[babynames.py](./babynames.py)` file, implement the `extract_names(filename)` function which takes the filename of a single `babyXXXX.html` file and returns the data from the file as a single list -- the year string at the start of the list followed by the name-rank strings in alphabetical order. 
 ```
 ['2006', 'Aaliyah 91', 'Abagail 895', 'Aaron 57', ...] 
 ```
-Modify `main()` so it calls your `extract_names()` function and prints what it returns (main already has the code for the command line argument parsing). If you get stuck working out the regular expressions for the year and each name, solution regular expression patterns are shown at the end of this document. Note that for parsing webpages in general, regular expressions don't do a good job, but these webpages have a simple and consistent format.
+Modify `main(args)` so it calls your `extract_names(filename)` function and prints what it returns (main already has the code for the command line argument parsing). If you get stuck working out the regular expressions for the year and each name, solution regular expression patterns are shown at the end of this readme. Note that for parsing webpages in general, regular expressions don't do a good job, but these webpages have a simple and consistent format.
 
 Rather than treat the boy and girl names separately, we'll just lump them all together. In some years, a name appears more than once in the html, but we'll just use one number per name. Optional: make the algorithm smart about this case and choose whichever number is smaller.
 
@@ -45,9 +45,9 @@ Abbie 650
 Part B
 ------
 
-Suppose instead of printing the text to stdout, we want to write files containing the text. If the flag `--summaryfile` is present, do the following: for each input file 'foo.html', instead of printing to standard output, write a new file `foo.html.summary` that contains the summary text for that file.
+Suppose instead of printing the text to stdout, we want to write files containing the text. If the flag `--summaryfile` is present, do the following: for each input file `foo.html`, instead of printing to standard output, write a new file `foo.html.summary` that contains the summary text for that file.
 
-Once the `--summaryfile` feature is working, run the program on all the files using * like this:  
+Once the `--summaryfile` feature is working, run the program on all the files using `*` like this:  
 `python babynames.py --summaryfile baby*.html`.  
 This generates all the summaries in one step. (The standard behavior of the shell is that it expands the `baby*.html` pattern into the list of matching filenames, and then the shell runs babynames.py, passing in all those filenames in the sys.argv list.)
 
@@ -59,9 +59,15 @@ $ grep 'Miguel ' *.summary
 $ grep 'Emily ' *.summary
 ```
 
-Regular expression hints
+**Regular expression hints**
 - year:  `r'Popularity\sin\s(\d\d\d\d)`
 - names: `r'<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>'`
+
+## Testing your code
+This assignment contains a `tests` folder that will test your code in several different ways.  Make sure you are passing all the tests before you submit your work!  There are a couple of ways to test.
+ - From the command line:
+   `$ python -m unittest discover`
+ - Using the built-in TDD framework of VSCode.  Read [this article](https://code.visualstudio.com/docs/python/testing) and understand how to enable the framework in your VSCode IDE.  Once the framework is enabled, you can run and debug any of the tests individually. 
 
 ## PR (Pull Request) Workflow for this Assignment
 1. *Fork* this repository into your own personal github account.
