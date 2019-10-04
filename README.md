@@ -8,7 +8,7 @@ You will need to add your own code to [babynames.py](./babynames.py) to complete
 Part A
 ------
 
-In the `[babynames.py](./babynames.py)` file, implement the `extract_names(filename)` function which takes the filename of a single `babyXXXX.html` file and returns the data from the file as a single list -- the year string at the start of the list followed by the name-rank strings in alphabetical order. 
+In the [babynames.py](./babynames.py) file, implement the `extract_names(filename)` function which takes the filename of a single `babyXXXX.html` file and returns the data from the file as a single list -- the year string at the start of the list followed by the name-rank strings in alphabetical order. 
 ```
 ['2006', 'Aaliyah 91', 'Abagail 895', 'Aaron 57', ...] 
 ```
@@ -45,11 +45,11 @@ Abbie 650
 Part B
 ------
 
-Suppose instead of printing the text to stdout, we want to write files containing the text. If the flag `--summaryfile` is present, do the following: for each input file `foo.html`, instead of printing to standard output, write a new file `foo.html.summary` that contains the summary text for that file.
+Suppose instead of printing the text to stdout, we want to write files containing the text. If the flag `--summaryfile` is present on the command line, do the following: for each input file `babyXXXX.html`, instead of printing to standard output, write a new file `babyXXXX.html.summary` that contains the summary text for that file.
 
 Once the `--summaryfile` feature is working, run the program on all the files using `*` like this:  
 `python babynames.py --summaryfile baby*.html`.  
-This generates all the summaries in one step. (The standard behavior of the shell is that it expands the `baby*.html` pattern into the list of matching filenames, and then the shell runs babynames.py, passing in all those filenames in the sys.argv list.)
+This generates all the summaries in one step. (The standard behavior of the shell is that it expands the `baby*.html` pattern into the list of matching filenames, and then the shell runs babynames.py, passing in all those filenames in the `sys.argv` list.)
 
 With the data organized into summary files, you can see patterns over time with shell commands, like this:
 ```
