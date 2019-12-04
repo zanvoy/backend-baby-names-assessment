@@ -43,7 +43,7 @@ class TestBabynames(unittest.TestCase):
         with open(summary_file) as sf:
             summary_list = sf.read().splitlines()
             # Remove empty strings
-            summary_list = filter(None, summary_list)
+            summary_list = list(filter(None, summary_list))
             return summary_list
 
     def remove_extension_files(self, ext):
@@ -106,6 +106,6 @@ class TestBabynames(unittest.TestCase):
             actual_list = babynames.extract_names(f)
             self.assertIsInstance(actual_list, list)
             # Remove empty strings before comparing
-            actual_list = filter(None, actual_list)
+            actual_list = list(filter(None, actual_list))
             # This will perform element-by-element comparison.
             self.assertListEqual(actual_list, expected_list)
