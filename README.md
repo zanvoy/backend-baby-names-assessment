@@ -14,11 +14,11 @@ In the [babynames.py](./babynames.py) file, implement the `extract_names(filenam
 ```
 Modify `main(args)` so it calls your `extract_names(filename)` function and prints what it returns (main already has the code for the command line argument parsing). If you get stuck working out the regular expressions for the year and each name, solution regular expression patterns are shown at the end of this readme. Note that for parsing webpages in general, regular expressions don't do a good job, but these webpages have a simple and consistent format.
 
-Rather than treat the boy and girl names separately, we'll just lump them all together. In some years, a name appears more than once in the html, but we'll just use one number per name. Optional: make the algorithm smart about this case and choose whichever number is smaller.
+Rather than treat the boy and girl names separately, we'll just lump them all together. In some years, a name appears more than once in the html, but we'll just use one rank number per name. 
 
 Build the program as a series of small milestones, getting each step to run/print something before trying the next step. This is the pattern used by experienced programmers -- build a series of incremental milestones, each with some output to check, rather than building the whole program in one huge step.
 
-Printing the data you have at the end of one milestone helps you think about how to re-structure that data for the next milestone. Python is well suited to this style of incremental development. For example, first get it to the point where it extracts and prints the year and calls sys.exit(0). Here are some suggested milestones:
+Printing the data you have at the end of one milestone helps you think about how to re-structure that data for the next milestone. Python is well suited to this style of incremental development. For example, first get it to the point where it extracts and prints the year. Here are some suggested milestones:
 
 *   Extract all the text from the file and print it
 *   Find and extract the year and print it
@@ -27,9 +27,9 @@ Printing the data you have at the end of one milestone helps you think about how
 *   Build the `[year, 'name rank', ... ]` list and print it
 *   Fix `main()` to use the extracted_names list
 
-Earlier we have had functions just print to stdout. It's more re-usable to have the function *return* the extracted data, so then the caller has the choice to print it or do something else with it. (You can still print directly from inside your functions for your little experiments during development.)
+Earlier we have had functions just print to stdout. It's more re-usable to have the function *return* the extracted data, so then the caller has the choice to print it or do something else with it. (You can still print directly from inside your functions for your little experiments during development.) This illustrates the principle of _Separation of Concerns_.  Have one function that delivers the data, and a different one to print or write the the data to a file.  This builds 'modularity' into your program so that it is easier to maintain.
 
-Have `main()` call `extract_names()` for each command line arg and print a text summary. To make the list into a reasonable looking summary text, here's a clever use of join: `text = '\n'.join(mylist) + '\n'`
+Have `main()` call `extract_names()` for each command line argument and print the results vertically. To make the list into a reasonable looking summary text, here's a clever use of join: `text = '\n'.join(mylist) + '\n'`
 
 The summary text should look like this for each file:
 ```
@@ -64,11 +64,15 @@ $ grep 'Emily ' *.summary
 - names: `r'<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>'`
 
 ## Testing your code
+Use the VSCode debugger for this assignment-- the debugger is your primary tool as a developer.  Have you heard of a carpenter that doesn't know how to use his own hammer?  Would you hire that guy?  If you need help on this assessment, *be sure you are able to run it in the debugger before asking for coach help.*
+
 This assignment contains a `tests` folder that will test your code in several different ways.  Make sure you are passing all the tests before you submit your work!  There are a couple of ways to test.
  - From the command line:
    `$ python -m unittest discover`
  - Using the built-in TDD framework of VSCode.  Read [this article](https://code.visualstudio.com/docs/python/testing) and understand how to enable the framework in your VSCode IDE.  Once the framework is enabled, you can run and debug any of the tests individually.
  ![Babynames Test](img/vscode-test.png)
+ To view the detailed results of the test output, select the OUTPUT tab in your integrated terminal window, and then choose "Python Test Log" in the dropdown.
+ ![Test Output](img/vscode-output.png)
 
 ## PR (Pull Request) Workflow for this Assignment
 1. *Fork* this repository into your own personal github account.
