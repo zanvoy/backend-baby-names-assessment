@@ -8,7 +8,7 @@ You will need to add your own code to [babynames.py](./babynames.py) to complete
 Part A
 ------
 
-In the [babynames.py](./babynames.py) file, implement the `extract_names(filename)` function which takes the filename of a single `babyXXXX.html` file and returns the data from the file as a single list -- the year string at the start of the list followed by the name-rank strings in alphabetical order. 
+In the [babynames.py](./babynames.py) file, implement the `extract_names(filename)` function which takes the filename of a single `babyXXXX.html` file and returns the data from the file as a single list -- the year string at the start of the list followed by the name-rank strings in alphabetical order. Make sure the returned list is a pure python list, not a 'stringified' version of the list.
 ```
 ['2006', 'Aaliyah 91', 'Abagail 895', 'Aaron 57', ...] 
 ```
