@@ -75,6 +75,14 @@ This assignment contains a `tests` folder that will test your code in several di
  ![Babynames Test](img/vscode-test.png)
  To view the detailed results of the test output, select the OUTPUT tab in your integrated terminal window, and then choose "Python Test Log" in the dropdown.
  ![Test Output](img/vscode-output.png)
+ - You may encounter this error message during testing:
+    ```self.assertListEqual(output, baby1990_list)
+    AssertionError: Lists differ: ['1990', 'Aaron 34', 'Abbey 48... != ['1990', 'Aaron 34', 'Abbey 48...
+    First differing element 14:
+    'Adrian 603'
+    'Adrian 94'
+    ```
+    This means that you are not handling duplicate names correctly-- keep the rank of the first name that you encounter during parsing.  If you see a duplicate name with a different rank, don't add it to your dictionary of names & ranks.  
 
 ## PR (Pull Request) Workflow for this Assignment
 1. *Fork* this repository into your own personal github account.
