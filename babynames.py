@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 # BabyNames python coding exercise.
 
+__author__ = 'Mike Gabbard'
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
@@ -14,31 +14,6 @@ import sys
 import re
 import argparse
 
-"""
-Define the extract_names() function below and change main()
-to call it.
-
-For writing regex, it's nice to include a copy of the target
-text for inspiration.
-
-Here's what the html looks like in the baby.html files:
-...
-<h3 align="center">Popularity in 1990</h3>
-....
-<tr align="right"><td>1</td><td>Michael</td><td>Jessica</td>
-<tr align="right"><td>2</td><td>Christopher</td><td>Ashley</td>
-<tr align="right"><td>3</td><td>Matthew</td><td>Brittany</td>
-...
-
-Suggested milestones for incremental development:
- - Extract the year and print it
- - Extract the names and rank numbers and just print them
- - Get the names data into a dict and print it
- - Build the [year, 'name rank', ... ] list and print it
- - Fix main() to use the extract_names list
-"""
-
-
 def extract_names(filename):
     """
     Given a single file name for babyXXXX.html, returns a single list starting
@@ -47,6 +22,21 @@ def extract_names(filename):
     """
     names = []
     # +++your code here+++
+    with open(filename) as f:
+        data = f.read()
+    year = re.search(r'Popularity\sin\s(\d\d\d\d)', data).group(1)
+    names.append(year)
+    extracted_names = re.findall(r'<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>', data)
+    name_dict = {}
+    for item in extracted_names:
+        (rank, boy, girl) = item
+        name_dict[girl] = rank
+        name_dict[boy] = rank
+    sorted_names = sorted(name_dict.keys())
+
+    for item in sorted_names:
+        names.append(item + ' ' + name_dict[item])
+
     return names
 
 
@@ -55,16 +45,11 @@ def create_parser():
     parser = argparse.ArgumentParser(description="Extracts and alphabetizes baby names from html.")
     parser.add_argument(
         '--summaryfile', help='creates a summary file', action='store_true')
-    # The nargs option instructs the parser to expect 1 or more filenames.
-    # It will also expand wildcards just like the shell, e.g. 'baby*.html' will work.
     parser.add_argument('files', help='filename(s) to parse', nargs='+')
     return parser
 
-
 def main(args):
-    # Create a command-line parser object with parsing rules
     parser = create_parser()
-    # Run the parser to collect command-line arguments into a NAMESPACE called 'ns'
     ns = parser.parse_args(args)
 
     if not ns:
@@ -73,16 +58,17 @@ def main(args):
 
     file_list = ns.files
 
-    # option flag
     create_summary = ns.summaryfile
 
-    # For each filename, call `extract_names` with that single file.
-    # Format the resulting list a vertical list (separated by newline \n)
-    # Use the create_summary flag to decide whether to print the list,
-    # or to write the list to a summary file e.g. `baby1990.html.summary`
 
-    # +++your code here+++
-
+    for file_name in file_list:
+        names = extract_names(file_name)
+        output = '\n'.join(names) + '\n'
+        if create_summary:
+            with open(file_name + '.summary', 'w') as output_file:
+                output_file.write(output)
+        else: 
+            print(output)
 
 if __name__ == '__main__':
     main(sys.argv[1:])
